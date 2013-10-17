@@ -10,6 +10,9 @@
   <name>Your Job's Name</name>
   <url>http://www.myorganization.org</url>
 
+  <!--  We use the most recent development version of Stratosphere,
+        therefore, we need to use the Snapshots repository of sonatype
+  -->
   <repositories>
    <repository>
      <id>snapshots-repo</id>
@@ -19,7 +22,9 @@
    </repository>
   </repositories>
 
-
+  <!--  These two requirements are the minimum to use and develop Stratosphere.
+        You can add others like <artifactId>pact-scala-core</artifactId> for Scala!
+  -->
   <dependencies>
     <dependency>
       <groupId>eu.stratosphere</groupId>
@@ -32,4 +37,36 @@
       <version>0.4-ozone-SNAPSHOT</version>
     </dependency>
   </dependencies>
+
+  <!--  We use the maven-jar-plugin to generate a runnable jar that you can
+        submit to your Stratosphere cluster.
+  -->
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.4</version>
+        <executions>
+
+          <!-- Sample Job -->
+          <execution>
+            <id>Sample</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <classifier>Sample</classifier>
+              <archive>
+                <manifestEntries>
+                  <Pact-Assembler-Class>eu.stratosphere.sdk.Job</Pact-Assembler-Class>
+                </manifestEntries>
+              </archive>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
