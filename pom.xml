@@ -3,7 +3,22 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>eu.stratosphere</groupId>
-  <artifactId>stratosphere-sdk</artifactId>
+  <artifactId>stratosphere-quickstart</artifactId>
   <version>0.4-SNAPSHOT</version>
   <packaging>jar</packaging>
+
+  <!-- See http://www.imixs.org/jee/archetype/build.html -->
+  <!-- Distributen Management oss.sonatype.org -->
+    <distributionManagement>
+            <snapshotRepository>
+                    <id>sonatype-nexus-snapshots</id>
+                    <name>Sonatype Nexus Snapshots</name>
+                    <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+            </snapshotRepository>
+            <repository>
+                    <id>sonatype-nexus-staging</id>
+                    <name>Nexus Release Repository</name>
+                    <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            </repository>
+    </distributionManagement>
 </project>
