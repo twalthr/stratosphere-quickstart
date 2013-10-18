@@ -2,9 +2,11 @@ language: java
 jdk:
   - openjdk7
 env:
-    global: 
-        -secure: "aHcOqHhCtkv7OcskYXA81yE2kCxKQJP7ZtaLO/Ok5fhFc+vrlob1D0sPk05ab8RxOrwvgtyXaYKKdr9uhiSQU8msEziadXD6Eslj38/+pRctnlnB6UQiBbtgImkwzX52KpcKCsn/AnUcg7xPWF8DpXp1kTepZgTaYDzX0x5TP2c="
-        -secure: "Gyv1KxEZPG0aThdPJcqwtwCmrWL/3ch0dZPCgzCjY8PgjPas6G1RcXRno0f8wCdmH06snge90RRZtT62jgXnhN/3MIHdWWiFLf/pjF0F4T9Cply1D1rYm4E3/5SNwXfeYFHHk/3rIu8OyWdk+JetjR9W7JerHHl0lkCZ+bgxfWE="
+  - secure: "aHcOqHhCtkv7OcskYXA81yE2kCxKQJP7ZtaLO/Ok5fhFc+vrlob1D0sPk05ab8RxOrwvgtyXaYKKdr9uhiSQU8msEziadXD6Eslj38/+pRctnlnB6UQiBbtgImkwzX52KpcKCsn/AnUcg7xPWF8DpXp1kTepZgTaYDzX0x5TP2c="
+  - secure: "Gyv1KxEZPG0aThdPJcqwtwCmrWL/3ch0dZPCgzCjY8PgjPas6G1RcXRno0f8wCdmH06snge90RRZtT62jgXnhN/3MIHdWWiFLf/pjF0F4T9Cply1D1rYm4E3/5SNwXfeYFHHk/3rIu8OyWdk+JetjR9W7JerHHl0lkCZ+bgxfWE="
+
+
+
 install: "mvn install"
 
 
