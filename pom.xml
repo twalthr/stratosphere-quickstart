@@ -5,7 +5,7 @@
   <groupId>eu.stratosphere</groupId>
   <artifactId>stratosphere-quickstart</artifactId>
   <version>0.4-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <!-- See http://www.imixs.org/jee/archetype/build.html -->
   <!-- Distributen Management oss.sonatype.org -->
@@ -21,4 +21,8 @@
                     <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
             </repository>
     </distributionManagement>
+
+    <modules>
+      <module>quickstart-java</module>
+    </modules>
 </project>

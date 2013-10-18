@@ -4,7 +4,7 @@ PACKAGE=quickstart
 
 mvn archetype:generate								\
   -DarchetypeGroupId=eu.stratosphere 				\
-  -DarchetypeArtifactId=stratosphere-quickstart		\
+  -DarchetypeArtifactId=quickstart-java				\
   -DarchetypeVersion=0.4-SNAPSHOT					\
   -DgroupId=eu.stratosphere 						\
   -DartifactId=$PACKAGE								\
@@ -33,6 +33,6 @@ echo -e "\\n\\n"
 #
 # mvn archetype:generate								\
 #   -DarchetypeGroupId=eu.stratosphere 				\
-#   -DarchetypeArtifactId=stratosphere-quickstart		\
+#   -DarchetypeArtifactId=quickstart-java		\
 #   -DarchetypeVersion=0.4-SNAPSHOT					\
 #   -DarchetypeCatalog=https://oss.sonatype.org/content/repositories/snapshots/
