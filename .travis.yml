@@ -3,9 +3,8 @@ jdk:
   - openjdk7
 env:
     global: 
-        -secure: "Zx37xSiSCBoQw3ADjfzb8VxiEyR+mYoJDhIy9jsEks5+B2c1rpNocvtaK1m2gbNHDq9n7z5BB1cUHC2ujdoUmzZbU5gRsK3UNU/PYtOm2BXDZwCyF8MqoYUaUMuLwPxH7+GmQn8B3YdJI/tg2vmUIyJl/ESPJllekPznm4JrzgI="
-        -secure: "hxgKrBbbTpRBwu62PC6JCzM+H64KgckZFAAH8VB3ZJkZBrUFemOxRDLCxWcV7/A5j7fgK++2g2ZVbyvzkscE8kESbiBJ6mply0mIAPqvwkfFEE7/HhN1XvXHT3r2jLX++OKlJc2eO7wb+G0lXIThQy2ucjhagjgYROitgnybXLM="
-        
+    	-secure: "aHcOqHhCtkv7OcskYXA81yE2kCxKQJP7ZtaLO/Ok5fhFc+vrlob1D0sPk05ab8RxOrwvgtyXaYKKdr9uhiSQU8msEziadXD6Eslj38/+pRctnlnB6UQiBbtgImkwzX52KpcKCsn/AnUcg7xPWF8DpXp1kTepZgTaYDzX0x5TP2c="
+    	-secure: "Gyv1KxEZPG0aThdPJcqwtwCmrWL/3ch0dZPCgzCjY8PgjPas6G1RcXRno0f8wCdmH06snge90RRZtT62jgXnhN/3MIHdWWiFLf/pjF0F4T9Cply1D1rYm4E3/5SNwXfeYFHHk/3rIu8OyWdk+JetjR9W7JerHHl0lkCZ+bgxfWE="
 install: "mvn install"
 
 
