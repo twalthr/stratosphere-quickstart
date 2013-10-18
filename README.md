@@ -23,3 +23,4 @@ mvn archetype:generate                              \
 ```
 
 
+[![Build Status](https://travis-ci.org/stratosphere/stratosphere-quickstart.png?branch=master)](https://travis-ci.org/stratosphere/stratosphere-quickstart)
