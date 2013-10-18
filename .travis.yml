@@ -1,0 +1,14 @@
+language: java
+jdk:
+  - openjdk7
+env:
+    global: 
+        -secure: "Zx37xSiSCBoQw3ADjfzb8VxiEyR+mYoJDhIy9jsEks5+B2c1rpNocvtaK1m2gbNHDq9n7z5BB1cUHC2ujdoUmzZbU5gRsK3UNU/PYtOm2BXDZwCyF8MqoYUaUMuLwPxH7+GmQn8B3YdJI/tg2vmUIyJl/ESPJllekPznm4JrzgI="
+        -secure: "hxgKrBbbTpRBwu62PC6JCzM+H64KgckZFAAH8VB3ZJkZBrUFemOxRDLCxWcV7/A5j7fgK++2g2ZVbyvzkscE8kESbiBJ6mply0mIAPqvwkfFEE7/HhN1XvXHT3r2jLX++OKlJc2eO7wb+G0lXIThQy2ucjhagjgYROitgnybXLM="
+        
+install: "mvn install"
+
+
+# deploy if the first job is successful; should be replaced by an after_all_success if travis finally supports it
+after_success: 
+- "mvn deploy --settings .deploysettings.xml"
