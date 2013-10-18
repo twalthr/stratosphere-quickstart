@@ -64,7 +64,7 @@
               <classifier>Sample</classifier>
               <archive>
                 <manifestEntries>
-                  <Pact-Assembler-Class>eu.stratosphere.sdk.Job</Pact-Assembler-Class>
+                  <Pact-Assembler-Class>eu.stratosphere.quickstart.Job</Pact-Assembler-Class>
                 </manifestEntries>
               </archive>
             </configuration>
