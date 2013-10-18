@@ -1,4 +1,4 @@
-package eu.stratosphere.quickstart;
+package ${package};
 
 
 import eu.stratosphere.pact.client.LocalExecutor;

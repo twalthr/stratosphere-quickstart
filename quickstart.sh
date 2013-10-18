@@ -9,7 +9,7 @@ mvn archetype:generate								\
   -DgroupId=eu.stratosphere 						\
   -DartifactId=$PACKAGE								\
   -Dversion=0.1										\
-  -Dpackage=$PACKAGE 								\
+  -Dpackage=eu.stratosphere.quickstart 				\
   -DinteractiveMode=false							\
   -DarchetypeCatalog=https://oss.sonatype.org/content/repositories/snapshots/
 

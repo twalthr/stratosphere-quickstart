@@ -2,6 +2,6 @@
   xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype/1.0.0 http://maven.apache.org/xsd/archetype-1.0.0.xsd">
   <id>stratosphere-quickstart</id>
   <sources>
-    <source>src/main/java/eu/stratosphere/quickstart/Job.java</source>
+    <source>src/main/java/Job.java</source>
   </sources>
 </archetype>
