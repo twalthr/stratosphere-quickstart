@@ -3,5 +3,6 @@
   <id>stratosphere-quickstart</id>
   <sources>
     <source>src/main/java/Job.java</source>
+    <source>src/main/java/WordCountJob.java</source>
   </sources>
 </archetype>
