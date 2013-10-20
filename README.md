@@ -36,7 +36,7 @@ using this command. This call will ask you to name your newly created Job.
 ``` bash
 mvn archetype:generate                              \
    -DarchetypeGroupId=eu.stratosphere               \
-   -DarchetypeArtifactId=quickstart                 \
+   -DarchetypeArtifactId=quickstart-java                 \
    -DarchetypeVersion=0.4-SNAPSHOT                  \
    -DarchetypeCatalog=https://oss.sonatype.org/content/repositories/snapshots/
 ```
