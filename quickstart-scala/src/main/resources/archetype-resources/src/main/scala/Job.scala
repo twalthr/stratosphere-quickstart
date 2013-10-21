@@ -12,7 +12,7 @@ import eu.stratosphere.pact.common.plan.PlanAssembler
 import eu.stratosphere.pact.common.plan.PlanAssemblerDescription
 
 // You can run this using:
-// mvn exec:exec -Dexec.executable="java" -Dexec.args="-cp %classpath ${package}.RunJob 2 file:///home/aljoscha/nohup.out file:///home/aljoscha/wc-out"
+// mvn exec:exec -Dexec.executable="java" -Dexec.args="-cp %classpath ${package}.RunJob 2 file:///some/path file:///some/other/path"
 object RunJob {
   def main(args: Array[String]) {
     val job = new Job
