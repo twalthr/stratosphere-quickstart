@@ -63,6 +63,9 @@ public class Job implements PlanAssembler, PlanAssemblerDescription {
         return "Usage: ... "; // TODO
     }
 
+
+    // You can run this using:
+    // mvn exec:exec -Dexec.executable="java" -Dexec.args="-cp %classpath ${package}.RunJob <args>"
     public static void main(String[] args) throws Exception {
         Job tut = new Job();
         Plan toExecute = tut.getPlan( /* Arguments */);
