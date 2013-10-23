@@ -2,6 +2,7 @@ package ${package};
 
 import scala.Array.canBuildFrom
 import eu.stratosphere.pact.client.LocalExecutor
+import eu.stratosphere.pact.client.RemoteExecutor
 import eu.stratosphere.scala.DataSource
 import eu.stratosphere.scala.ScalaPlan
 import eu.stratosphere.scala.operators.arrayToIterator
@@ -11,9 +12,9 @@ import eu.stratosphere.scala.TextFile
 import eu.stratosphere.pact.common.plan.PlanAssembler
 import eu.stratosphere.pact.common.plan.PlanAssemblerDescription
 
-// You can run this using:
-// mvn exec:exec -Dexec.executable="java" -Dexec.args="-cp %classpath ${package}.RunJob 2 file:///some/path file:///some/other/path"
-object RunJob {
+// You can run this locally using:
+// mvn exec:exec -Dexec.executable="java" -Dexec.args="-cp %classpath ${package}.RunJobLocal 2 file:///some/path file:///some/other/path"
+object RunJobLocal {
   def main(args: Array[String]) {
     val job = new Job
     if (args.size < 3) {
@@ -23,6 +24,27 @@ object RunJob {
     val plan = job.getScalaPlan(args(0).toInt, args(1), args(2))
     LocalExecutor.execute(plan)
     System.exit(0)
+  }
+}
+
+// You can run this on a cluster using:
+// mvn exec:exec -Dexec.executable="java" -Dexec.args="-cp %classpath ${package}.RunJobRemote 2 file:///some/path file:///some/other/path"
+object RunJobRemote {
+  def main(args: Array[String]) {
+    val job = new Job
+    if (args.size < 3) {
+      println(job.getDescription)
+      return
+    }
+    val plan = job.getScalaPlan(args(0).toInt, args(1), args(2))
+    // This will create an executor to run the plan on a cluster. We assume
+    // that the JobManager is running on the local machine on the default
+    // port. Change this according to your configuration.
+    // You will also need to change the name of the jar if you change the
+    // project name and/or version. Before running this you also need
+    // to run "mvn package" to create the jar.
+    val ex = new RemoteExecutor("localhost", 6123, "target/stratosphere-project-0.1-SNAPSHOT.jar");
+    ex.executePlan(plan);
   }
 }
 
