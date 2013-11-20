@@ -62,7 +62,6 @@ public class WordCountJob implements PlanAssembler, PlanAssemblerDescription {
 				collector.collect(this.output);
 			}
 		}
-
 	}
 
 	public static class CountWords extends ReduceStub {
@@ -111,6 +110,7 @@ public class WordCountJob implements PlanAssembler, PlanAssemblerDescription {
 	public Plan getPlan(String... args) {
 		String inputPath = (args.length >= 1 ? args[0] : "");
 		String outputPath = (args.length >= 2 ? args[1] : "");
+		int parallelism = (args.length >= 3 ? Integer.parseInt(args[2]) : 1);
 
 		// input: treat input as text with TextInputFormat
 		FileDataSource source = new FileDataSource(TextInputFormat.class, inputPath, "input: lines");
@@ -141,7 +141,7 @@ public class WordCountJob implements PlanAssembler, PlanAssemblerDescription {
 			.field(PactInteger.class, 1);      // <--+    if you want (count, word) instead
 
 		Plan plan = new Plan(sink, "WordCount Sample Job");
-		plan.setDefaultParallelism(1);
+		plan.setDefaultParallelism(parallelism);
 
 		return plan;
 	}
@@ -152,21 +152,17 @@ public class WordCountJob implements PlanAssembler, PlanAssemblerDescription {
 
 	// -- RUNNING IN LOCAL MODE -----------------------------------------------
 
-	public static void execute(Plan toExecute) throws Exception {
-		LocalExecutor executor = new LocalExecutor();
-		executor.start();
-		long runtime = executor.executePlan(toExecute);
-		System.out.println("runtime:  " + runtime);
-		executor.stop();
-	}
-
 	public static void main(String[] args) throws Exception {
 		WordCountJob tut = new WordCountJob();
 		String inputPath = "file:///path/to/input";
 		String outputPath = "file:///path/to/output";
+		String parallelism = "2";
 
-		Plan toExecute = tut.getPlan(inputPath, outputPath);
-		execute(toExecute);
+		Plan toExecute = tut.getPlan(inputPath, outputPath, parallelism);
+		// alternatively: Plan toExecute = tut.getPlan(args); 
+		
+		long runtime = LocalExecutor.execute(toExecute);
+		System.out.println("runtime:  " + runtime);
 		System.exit(0);
 	}
 }

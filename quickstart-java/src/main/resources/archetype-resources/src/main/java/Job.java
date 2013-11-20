@@ -1,6 +1,5 @@
 package ${package};
 
-
 import eu.stratosphere.pact.client.LocalExecutor;
 import eu.stratosphere.pact.common.contract.FileDataSink;
 import eu.stratosphere.pact.common.contract.GenericDataSink;
@@ -30,14 +29,6 @@ import eu.stratosphere.pact.common.plan.PlanAssemblerDescription;
  */
 public class Job implements PlanAssembler, PlanAssemblerDescription {
 
-    public static void execute(Plan toExecute) throws Exception {
-        LocalExecutor executor = new LocalExecutor();
-        executor.start();
-        long runtime = executor.executePlan(toExecute);
-        System.out.println("runtime:  " + runtime);
-        executor.stop();
-    }
-
     public Plan getPlan(String... args) {
     	/**
     	 * Here, you can start creating your execution plan for stratosphere.
@@ -63,12 +54,14 @@ public class Job implements PlanAssembler, PlanAssemblerDescription {
         return "Usage: ... "; // TODO
     }
 
-
     // You can run this using:
     // mvn exec:exec -Dexec.executable="java" -Dexec.args="-cp %classpath ${package}.RunJob <args>"
     public static void main(String[] args) throws Exception {
         Job tut = new Job();
-        Plan toExecute = tut.getPlan( /* Arguments */);
-        execute(toExecute);
+        Plan toExecute = tut.getPlan(args);
+
+        long runtime = LocalExecutor.execute(toExecute);
+        System.out.println("runtime:  " + runtime);
+        System.exit(0);
     }
 }
