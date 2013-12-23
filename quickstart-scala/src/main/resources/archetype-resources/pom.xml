@@ -10,17 +10,6 @@
   <name>Your Job's Name</name>
   <url>http://www.myorganization.org</url>
 
-  <!--  We use the most recent development version of Stratosphere,
-        therefore, we need to use the Snapshots repository of sonatype
-  -->
-  <repositories>
-   <repository>
-     <id>snapshots-repo</id>
-     <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-     <releases><enabled>false</enabled></releases>
-     <snapshots><enabled>true</enabled></snapshots>
-   </repository>
-  </repositories>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -32,13 +21,18 @@
   <dependencies>
     <dependency>
       <groupId>eu.stratosphere</groupId>
-      <artifactId>pact-scala-core</artifactId>
-      <version>0.4-SNAPSHOT</version>
+      <artifactId>stratosphere-scala</artifactId>
+      <version>0.4-rc1</version>
     </dependency>
     <dependency>
       <groupId>eu.stratosphere</groupId>
-      <artifactId>pact-clients</artifactId>
-      <version>0.4-SNAPSHOT</version>
+      <artifactId>stratosphere-clients</artifactId>
+      <version>0.4-rc1</version>
+    </dependency>
+    <dependency>
+      <groupId>eu.stratosphere</groupId>
+      <artifactId>stratosphere-core</artifactId>
+      <version>0.4-rc1</version>
     </dependency>
   </dependencies>
 

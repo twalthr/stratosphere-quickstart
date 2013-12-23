@@ -2,22 +2,23 @@ package ${package};
 
 import java.util.Iterator;
 
-import eu.stratosphere.pact.client.LocalExecutor;
-import eu.stratosphere.pact.common.contract.FileDataSink;
-import eu.stratosphere.pact.common.contract.FileDataSource;
-import eu.stratosphere.pact.common.contract.MapContract;
-import eu.stratosphere.pact.common.contract.ReduceContract;
-import eu.stratosphere.pact.common.io.RecordOutputFormat;
-import eu.stratosphere.pact.common.io.TextInputFormat;
-import eu.stratosphere.pact.common.plan.Plan;
-import eu.stratosphere.pact.common.plan.PlanAssembler;
-import eu.stratosphere.pact.common.plan.PlanAssemblerDescription;
-import eu.stratosphere.pact.common.stubs.Collector;
-import eu.stratosphere.pact.common.stubs.MapStub;
-import eu.stratosphere.pact.common.stubs.ReduceStub;
-import eu.stratosphere.pact.common.type.PactRecord;
-import eu.stratosphere.pact.common.type.base.PactInteger;
-import eu.stratosphere.pact.common.type.base.PactString;
+import eu.stratosphere.api.common.Plan;
+import eu.stratosphere.api.common.Program;
+import eu.stratosphere.api.common.operators.FileDataSink;
+import eu.stratosphere.api.common.operators.FileDataSource;
+import eu.stratosphere.api.java.record.functions.MapFunction;
+import eu.stratosphere.api.java.record.functions.ReduceFunction;
+import eu.stratosphere.api.java.record.io.CsvOutputFormat;
+import eu.stratosphere.api.java.record.io.TextInputFormat;
+import eu.stratosphere.api.java.record.operators.MapOperator;
+import eu.stratosphere.api.java.record.operators.ReduceOperator;
+import eu.stratosphere.client.LocalExecutor;
+import eu.stratosphere.nephele.client.JobExecutionResult;
+import eu.stratosphere.types.IntValue;
+import eu.stratosphere.types.Record;
+import eu.stratosphere.types.StringValue;
+import eu.stratosphere.util.Collector;
+
 
 /**
  * A sample word count Stratosphere job.
@@ -28,28 +29,28 @@ import eu.stratosphere.pact.common.type.base.PactString;
  * The two inner classes SplitWords and CountWords provide sample user logic to count the words. Please check the
  * respective comments for details.
  */
-public class WordCountJob implements PlanAssembler, PlanAssemblerDescription {
+public class WordCountJob implements Program {
 
 	// -- SAMPLE OPERATORS with word counting logic ---------------------------
 
-	public static class SplitWords extends MapStub {
+	public static class SplitWords extends MapFunction {
 
 		// resusable mutable objects
-		private final PactRecord output = new PactRecord();
+		private final Record output = new Record();
 
-		private final PactString word = new PactString();
+		private final StringValue word = new StringValue();
 
-		private final PactInteger one = new PactInteger(1);
+		private final IntValue one = new IntValue(1);
 
 		/**
 		 * Splits every line by whitespace and emits a (word, 1) record for
 		 * each word.
 		 */
 		@Override
-		public void map(PactRecord record, Collector<PactRecord> collector) {
+		public void map(Record record, Collector<Record> collector) {
 			// read the first field of the record
-			// note: PactRecord field indexes start with 0
-			PactString line = record.getField(0, PactString.class);
+			// note: Record field indexes start with 0
+			StringValue line = record.getField(0, StringValue.class);
 
 			// split every line by whitespace
 			for (String currentWord : line.getValue().split(" ")) {
@@ -64,22 +65,22 @@ public class WordCountJob implements PlanAssembler, PlanAssemblerDescription {
 		}
 	}
 
-	public static class CountWords extends ReduceStub {
+	public static class CountWords extends ReduceFunction {
 
-		private final PactInteger count = new PactInteger();
+		private final IntValue count = new IntValue();
 
 		/**
 		 * Counts the ones for each word and emits a (word, sum) record for
 		 * each word.
 		 */
 		@Override
-		public void reduce(Iterator<PactRecord> records, Collector<PactRecord> out) throws Exception {
-			PactRecord current = null;
+		public void reduce(Iterator<Record> records, Collector<Record> out) throws Exception {
+			Record current = null;
 
 			int sum = 0;
 			while (records.hasNext()) {
 				current = records.next();
-				sum += current.getField(1, PactInteger.class).getValue();
+				sum += current.getField(1, IntValue.class).getValue();
 			}
 
 			// output: (word, sum) record
@@ -106,6 +107,7 @@ public class WordCountJob implements PlanAssembler, PlanAssemblerDescription {
 	 *                    (bar, 1)           (bar, 1)              bar, 1
 	 *                    (foo, 1)
 	 * </pre>
+	 * @return Plan object describing the Stratosphere Job.
 	 */
 	public Plan getPlan(String... args) {
 		String inputPath = (args.length >= 1 ? args[0] : "");
@@ -116,29 +118,29 @@ public class WordCountJob implements PlanAssembler, PlanAssemblerDescription {
 		FileDataSource source = new FileDataSource(TextInputFormat.class, inputPath, "input: lines");
 
 		// build map contract with SplitWords class
-		MapContract words = MapContract.builder(SplitWords.class)
+		MapOperator words = MapOperator.builder(SplitWords.class)
 			.input(source) // file source as input to the mapper
 			.name("tokenize lines")
 			.build();
 
 		// build reduce contract with CountWords class
-		ReduceContract counts = ReduceContract.builder(CountWords.class)
+		ReduceOperator counts = ReduceOperator.builder(CountWords.class)
 			.input(words) // map output as input to the reduce
-			.keyField(PactString.class, 0)
+			.keyField(StringValue.class, 0)
 			.name("count words")
 			.build();
 		
 		// output: write every record from the reduce as output
-		FileDataSink sink = new FileDataSink(RecordOutputFormat.class, outputPath, counts, "output: word counts");
+		FileDataSink sink = new FileDataSink(CsvOutputFormat.class, outputPath, counts, "output: word counts");
 		
 		// configure the record output format (at least one field needs to be specified) 
-		RecordOutputFormat.configureRecordFormat(sink)
+		CsvOutputFormat.configureRecordFormat(sink)
 			.recordDelimiter('\n')
 			.fieldDelimiter(' ')
 			// the following lines configure the fields to write (in given order)
 			// e.g. word (field 0), count (field 1)
-			.field(PactString.class, 0)        // <--+ swap lines 
-			.field(PactInteger.class, 1);      // <--+    if you want (count, word) instead
+			.field(StringValue.class, 0)        // <--+ swap lines 
+			.field(IntValue.class, 1);      // <--+    if you want (count, word) instead
 
 		Plan plan = new Plan(sink, "WordCount Sample Job");
 		plan.setDefaultParallelism(parallelism);
@@ -161,8 +163,8 @@ public class WordCountJob implements PlanAssembler, PlanAssemblerDescription {
 		Plan toExecute = tut.getPlan(inputPath, outputPath, parallelism);
 		// alternatively: Plan toExecute = tut.getPlan(args); 
 		
-		long runtime = LocalExecutor.execute(toExecute);
-		System.out.println("runtime:  " + runtime);
+		JobExecutionResult result = LocalExecutor.execute(toExecute);
+		System.out.println("runtime:  " + result.getNetRuntime());
 		System.exit(0);
 	}
 }

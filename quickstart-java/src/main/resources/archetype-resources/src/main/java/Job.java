@@ -1,12 +1,12 @@
 package ${package};
 
-import eu.stratosphere.pact.client.LocalExecutor;
-import eu.stratosphere.pact.common.contract.FileDataSink;
-import eu.stratosphere.pact.common.contract.GenericDataSink;
-import eu.stratosphere.pact.common.io.DelimitedOutputFormat;
-import eu.stratosphere.pact.common.plan.Plan;
-import eu.stratosphere.pact.common.plan.PlanAssembler;
-import eu.stratosphere.pact.common.plan.PlanAssemblerDescription;
+import eu.stratosphere.api.common.Plan;
+import eu.stratosphere.api.common.Program;
+import eu.stratosphere.api.common.operators.FileDataSink;
+import eu.stratosphere.api.common.operators.GenericDataSink;
+import eu.stratosphere.api.java.record.io.DelimitedOutputFormat;
+import eu.stratosphere.client.LocalExecutor;
+import eu.stratosphere.nephele.client.JobExecutionResult;
 
 
 /**
@@ -27,20 +27,20 @@ import eu.stratosphere.pact.common.plan.PlanAssemblerDescription;
  * 		target/stratosphere-quickstart-0.1-SNAPSHOT-Sample.jar
  *
  */
-public class Job implements PlanAssembler, PlanAssemblerDescription {
+public class Job implements Program {
 
     public Plan getPlan(String... args) {
     	/**
     	 * Here, you can start creating your execution plan for stratosphere.
     	 * 
-    	 * The Wordcount example in "pact-examples" shows you how a very basic job is implemented.
+    	 * The Wordcount example in "stratosphere-java-examples" shows you how a very basic job is implemented.
     	 * 
     	 * You could also start with something different.
     	 * Create a FileDataSource first.
     	 * Give it a Input Format.
-    	 * Create a PACT Contract (Join, Match, Reduce, Cross, ..) and connect its input
+    	 * Create a  Operator (Join, Match, Reduce, Cross, ..) and connect its input
     	 * with the FileDataSource.
-    	 * Connect the output of your PACT Contract with the FileDataSink.
+    	 * Connect the output of the Operators with the FileDataSink.
     	 * Connect the FileDataSink with the Plan.
     	 * 
     	 * Run it!
@@ -60,8 +60,8 @@ public class Job implements PlanAssembler, PlanAssemblerDescription {
         Job tut = new Job();
         Plan toExecute = tut.getPlan(args);
 
-        long runtime = LocalExecutor.execute(toExecute);
-        System.out.println("runtime:  " + runtime);
+        JobExecutionResult result = LocalExecutor.execute(toExecute);
+        System.out.println("runtime:  " + result.getNetRuntime());
         System.exit(0);
     }
 }

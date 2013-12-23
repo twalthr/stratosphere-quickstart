@@ -3,14 +3,16 @@ stratosphere-quickstart
 
 Two simple quickstart maven archetypes for Stratosphere.
 
-###Create an empty Java Stratosphere Job
+# Stratosphere Stable
+
+###Create an empty Java Stratosphere Job Project
 Maven is required
 
 ```
 curl https://raw.github.com/stratosphere/stratosphere-quickstart/master/quickstart.sh | bash
 ```
 
-###Create a simple scala Stratosphere Job
+###Create a simple scala Stratosphere Job Project
 Maven is required
 
 ```
@@ -51,5 +53,27 @@ mvn archetype:generate                              \
    -DarchetypeCatalog=https://oss.sonatype.org/content/repositories/snapshots/
 ```
 
+
+# Stratosphere SNAPSHOT Archetypes
+
+
+
+# Repository Organization
+
+The quickstart bash scripts do not necessarily point to the most recent version in the code. Since the archetypes are versioned, the quickstarts usually differ by pointing to a specific version.
+
+The `quickstart.sh` script always points to the current stable release (v0.4, v0.5)
+`-SNAPSHOT` points to the current snapshot version.
+
+Java:
+```
+curl https://raw.github.com/stratosphere/stratosphere-quickstart/master/quickstart-SNAPSHOT.sh | bash
+```
+
+Scala:
+
+```
+curl https://raw.github.com/stratosphere/stratosphere-quickstart/master/quickstart-scala-SNAPSHOT.sh | bash
+```
 
 [![Build Status](https://travis-ci.org/stratosphere/stratosphere-quickstart.png?branch=master)](https://travis-ci.org/stratosphere/stratosphere-quickstart)

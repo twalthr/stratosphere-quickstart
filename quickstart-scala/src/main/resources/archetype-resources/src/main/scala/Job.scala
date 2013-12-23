@@ -1,13 +1,14 @@
 package ${package};
 
-import eu.stratosphere.pact.client.LocalExecutor
-import eu.stratosphere.pact.client.RemoteExecutor
-import eu.stratosphere.pact.common.plan.PlanAssembler
-import eu.stratosphere.pact.common.plan.PlanAssemblerDescription
 
-
-import eu.stratosphere.scala._
-import eu.stratosphere.scala.operators._
+import eu.stratosphere.api.common.Program
+import eu.stratosphere.api.common.ProgramDescription
+import eu.stratosphere.client.LocalExecutor
+import eu.stratosphere.api.scala.TextFile
+import eu.stratosphere.api.scala.ScalaPlan
+import eu.stratosphere.api.scala._
+import eu.stratosphere.api.scala.operators._
+import eu.stratosphere.client.RemoteExecutor
 
 // You can run this locally using:
 // mvn exec:exec -Dexec.executable="java" -Dexec.args="-cp %classpath ${package}.RunJobLocal 2 file:///some/path file:///some/other/path"
@@ -63,7 +64,7 @@ object RunJobRemote {
  *      target/stratosphere-quickstart-0.1-SNAPSHOT-Sample.jar
  *
  */
-class Job extends PlanAssembler with PlanAssemblerDescription with Serializable {
+class Job extends Program with ProgramDescription with Serializable {
   override def getDescription() = {
     "Parameters: [numSubStasks] [input] [output]"
   }
