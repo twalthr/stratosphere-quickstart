@@ -2,9 +2,9 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>eu.stratosphere</groupId>
-  <artifactId>stratosphere-project</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <groupId>${groupId}</groupId>
+  <artifactId>${artifactId}</artifactId>
+  <version>${version}</version>
   <packaging>jar</packaging>
 
   <name>Your Job's Name</name>

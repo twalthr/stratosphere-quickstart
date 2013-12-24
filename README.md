@@ -35,22 +35,20 @@ Eclipse 3.7:
 
 ###Generate project manually:
 using this command. This call will ask you to name your newly created Job.
-``` bash
+```bash
 mvn archetype:generate                              \
    -DarchetypeGroupId=eu.stratosphere               \
    -DarchetypeArtifactId=quickstart-java                 \
-   -DarchetypeVersion=0.4-SNAPSHOT                  \
-   -DarchetypeCatalog=https://oss.sonatype.org/content/repositories/snapshots/
+   -DarchetypeVersion=0.4-rc1 
 ```
 
 ###Generate scala project manually:
 using this command. This call will ask you to name your newly created Job.
-``` bash
+```bash
 mvn archetype:generate                              \
    -DarchetypeGroupId=eu.stratosphere               \
    -DarchetypeArtifactId=quickstart-scala           \
-   -DarchetypeVersion=0.4-SNAPSHOT                  \
-   -DarchetypeCatalog=https://oss.sonatype.org/content/repositories/snapshots/
+   -DarchetypeVersion=0.4-rc1
 ```
 
 
