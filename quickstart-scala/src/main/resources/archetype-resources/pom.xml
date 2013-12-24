@@ -29,11 +29,6 @@
       <artifactId>stratosphere-clients</artifactId>
       <version>0.4-rc1</version>
     </dependency>
-    <dependency>
-      <groupId>eu.stratosphere</groupId>
-      <artifactId>stratosphere-core</artifactId>
-      <version>0.4-rc1</version>
-    </dependency>
   </dependencies>
 
   <!--  We use the maven-jar-plugin to generate a runnable jar that you can
