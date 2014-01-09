@@ -4,8 +4,8 @@ PACKAGE=quickstart
 
 mvn archetype:generate								\
   -DarchetypeGroupId=eu.stratosphere 				\
-  -DarchetypeArtifactId=quickstart-java				\
-  -DarchetypeVersion=0.4-SNAPSHOT					\
+  -DarchetypeArtifactId=quickstart-java-SNAPSHOT				\
+  -DarchetypeVersion=0.5-SNAPSHOT					\
   -DgroupId=eu.stratosphere 						\
   -DartifactId=$PACKAGE								\
   -Dversion=0.1										\

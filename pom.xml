@@ -53,6 +53,8 @@
     <modules>
       <module>quickstart-java</module>
       <module>quickstart-scala</module>
+      <module>quickstart-scala-SNAPSHOT</module>
+      <module>quickstart-java-SNAPSHOT</module>
     </modules>
 
     <profiles>
