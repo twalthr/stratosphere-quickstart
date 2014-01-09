@@ -43,7 +43,7 @@
         <configuration>
           <archive>
             <manifestEntries>
-              <Pact-Assembler-Class>${package}.Job</Pact-Assembler-Class>
+              <program-class>${package}.Job</program-class>
             </manifestEntries>
           </archive>
         </configuration>
