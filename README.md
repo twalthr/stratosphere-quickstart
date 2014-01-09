@@ -75,3 +75,5 @@ curl https://raw.github.com/stratosphere/stratosphere-quickstart/master/quicksta
 ```
 
 [![Build Status](https://travis-ci.org/stratosphere/stratosphere-quickstart.png?branch=master)](https://travis-ci.org/stratosphere/stratosphere-quickstart)
+
+(Use `-DarchetypeCatalog=local` for local testing during archetype development)

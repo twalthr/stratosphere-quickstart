@@ -40,7 +40,7 @@
 				<configuration>
 					<archive>
 						<manifestEntries>
-							<Pact-Assembler-Class>eu.stratosphere.quickstart.Job</Pact-Assembler-Class>
+							<Pact-Assembler-Class>${package}.Job</Pact-Assembler-Class>
 						</manifestEntries>
 					</archive>
 				</configuration>
