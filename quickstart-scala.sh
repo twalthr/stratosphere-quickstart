@@ -5,7 +5,7 @@ PACKAGE=quickstart
 mvn archetype:generate								\
   -DarchetypeGroupId=eu.stratosphere 				\
   -DarchetypeArtifactId=quickstart-scala			\
-  -DarchetypeVersion=0.4-SNAPSHOT					\
+  -DarchetypeVersion=0.4-rc1					\
   -DgroupId=eu.stratosphere 						\
   -DartifactId=$PACKAGE								\
   -Dversion=0.1										\
