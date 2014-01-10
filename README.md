@@ -39,7 +39,7 @@ using this command. This call will ask you to name your newly created Job.
 mvn archetype:generate                              \
    -DarchetypeGroupId=eu.stratosphere               \
    -DarchetypeArtifactId=quickstart-java                 \
-   -DarchetypeVersion=0.4-rc1 
+   -DarchetypeVersion=0.4 
 ```
 
 ###Generate scala project manually:
@@ -48,7 +48,7 @@ using this command. This call will ask you to name your newly created Job.
 mvn archetype:generate                              \
    -DarchetypeGroupId=eu.stratosphere               \
    -DarchetypeArtifactId=quickstart-scala           \
-   -DarchetypeVersion=0.4-rc1
+   -DarchetypeVersion=0.4
 ```
 
 
