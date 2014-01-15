@@ -52,8 +52,12 @@ public class WordCountJob implements Program {
 			// note: Record field indexes start with 0
 			StringValue line = record.getField(0, StringValue.class);
 
-			// split every line by whitespace
-			for (String currentWord : line.getValue().split(" ")) {
+			// split every line by no word characters
+			for (String currentWord : line.getValue().toLowerCase().split("\\W+")) {
+				
+				// skip zero-length words
+				if(currentWord.length() <= 0) continue;
+				
 				// output: (word, 1) record
 				this.word.setValue(currentWord);
 
